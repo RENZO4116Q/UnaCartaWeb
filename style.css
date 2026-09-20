@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --night: #06182a;
+  --night-2: #0b2940;
+  --gold: #ffd86a;
+  --gold-soft: #fff0ad;
+  --cream: #fffaf0;
+  --ink: #27313a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(25, 75, 108, .55), transparent 36%),
+    radial-gradient(circle at 10% 90%, rgba(12, 69, 92, .42), transparent 30%),
+    linear-gradient(145deg, #020b16, var(--night) 45%, #09243a);
+}
+
+/* ---------- FONDO / ANIMACIONES ---------- */
+
+.stars,
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.stars::before,
+.stars::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.7px),
+    radial-gradient(circle, rgba(255,220,120,.8) 0 1px, transparent 1.8px);
+  background-size: 95px 95px, 137px 137px;
+  animation: drift 22s linear infinite;
+  opacity: .65;
+}
+
+.stars::after {
+  transform: rotate(25deg);
+  animation-duration: 30s;
+  opacity: .35;
+}
+
+.petals::before,
+.petals::after {
+  content: "✦  ·  ✧     ·     ✦     ·  ✧";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  color: rgba(255, 225, 130, .5);
+  font-size: 16px;
+  letter-spacing: 28px;
+  animation: falling 16s linear infinite;
+}
+
+.petals::after {
+  top: -25%;
+  animation-delay: -7s;
+  animation-duration: 23s;
+  opacity: .3;
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(90px, 55px, 0); }
+}
+
+@keyframes falling {
+  from { transform: translateY(-5vh) rotate(0deg); }
+  to { transform: translateY(115vh) rotate(20deg); }
+}
+
+/* ---------- PORTADA ---------- */
+
+.portada {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 620px);
+  margin: auto;
+  padding: 54px 22px 28px;
+  text-align: center;
+}
+
+.eyebrow,
+.letter-small {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .35em;
+}
+
+.hero h1 {
+  margin: 0 auto;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.3rem, 9vw, 4.6rem);
+  font-weight: 500;
+  line-height: .92;
+  text-shadow: 0 5px 30px rgba(0,0,0,.4);
+}
+
+.hero h1 span {
+  color: var(--gold-soft);
+  font-style: italic;
+}
+
+.flower-wrap {
+  position: relative;
+  width: min(88vw, 390px);
+  height: min(62vh, 480px);
+  min-height: 340px;
+  margin: 10px auto -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow {
+  position: absolute;
+  width: 65%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 197, 52, .18);
+  filter: blur(45px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-flower {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(255, 218, 99, .28))
+          drop-shadow(0 20px 25px rgba(0,0,0,.38));
+  animation: flowerFloat 5s ease-in-out infinite;
+}
+
+@keyframes flowerFloat {
+  0%, 100% { transform: translateY(4px) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(.9); opacity: .55; }
+  50% { transform: scale(1.08); opacity: .9; }
+}
+
+.sparkle-field {
+  position: absolute;
+  inset: 4% 8% 25%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sparkle-field::before,
+.sparkle-field::after {
+  content: "✦";
+  position: absolute;
+  color: white;
+  font-size: 18px;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--gold);
+  animation: sparkle 2.2s ease-in-out infinite;
+}
+
+.sparkle-field::before {
+  top: 10%;
+  left: 18%;
+}
+
+.sparkle-field::after {
+  top: 22%;
+  right: 15%;
+  animation-delay: .8s;
+  font-size: 12px;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(.5) rotate(0deg); }
+  45% { opacity: 1; transform: scale(1.2) rotate(25deg); }
+  65% { opacity: .3; transform: scale(.8) rotate(45deg); }
+}
+
+.intro {
+  max-width: 360px;
+  margin: 0 auto 22px;
+  color: rgba(255,255,255,.72);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.btn-carta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  border: 1px solid rgba(255, 220, 125, .6);
+  border-radius: 999px;
+  color: #fff8dd;
+  background: rgba(255, 209, 75, .08);
+  text-decoration: none;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  transition: transform .25s, background .25s, box-shadow .25s;
+}
+
+.btn-carta:hover,
+.btn-carta:active {
+  transform: translateY(-3px);
+  background: rgba(255, 209, 75, .16);
+  box-shadow: 0 10px 30px rgba(255, 203, 77, .12);
+}
+
+.arrow {
+  font-size: 1.1rem;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px 18px;
+  text-align: center;
+  color: rgba(255,255,255,.4);
+  font-size: .65rem;
+  letter-spacing: .12em;
+}
+
+/* ---------- CARTA ---------- */
+
+.carta-page {
+  min-height: 100svh;
+}
+
+.letter-scene {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 22px 16px 50px;
+}
+
+.back {
+  display: inline-block;
+  margin: 4px 0 16px;
+  color: rgba(255,255,255,.68);
+  text-decoration: none;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.back:hover {
+  color: var(--gold-soft);
+}
+
+.letter-card {
+  position: relative;
+  width: 100%;
+  padding: 42px clamp(24px, 7vw, 70px) 48px;
+  border: 1px solid rgba(174, 130, 52, .3);
+  border-radius: 6px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.9), transparent 24%),
+    linear-gradient(135deg, #fffdf7, #f7eedc);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.38),
+    inset 0 0 60px rgba(169, 127, 46, .06);
+}
+
+.letter-card::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(163, 120, 41, .2);
+  pointer-events: none;
+}
+
+.letter-flower {
+  color: #d49b28;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.letter-card h1 {
+  margin: 0;
+  text-align: center;
+  color: #263441;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  font-weight: 500;
+  line-height: .95;
+}
+
+.letter-small {
+  margin-top: 16px;
+  color: #b2832c;
+  text-align: center;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 28px;
+  color: #c79a46;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(174, 130, 52, .45));
+}
+
+.divider::after {
+  background: linear-gradient(90deg, rgba(174, 130, 52, .45), transparent);
+}
+
+.letter-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.18rem, 4.7vw, 1.4rem);
+  line-height: 1.55;
+}
+
+.letter-text p {
+  margin: 0 0 1.35em;
+}
+
+.signature {
+  margin-top: 34px;
+  text-align: right;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+}
+
+.signature span {
+  display: block;
+  color: #69747b;
+  font-style: italic;
+}
+
+.signature strong {
+  display: block;
+  margin-top: 4px;
+  color: #a77620;
+  font-size: 1.65rem;
+  font-weight: 600;
+}
+
+@media (max-width: 430px) {
+  .hero {
+    padding-top: 38px;
+  }
+
+  .hero h1 {
+    font-size: 2.55rem;
+  }
+
+  .flower-wrap {
+    height: 52vh;
+    min-height: 315px;
+    margin-top: 2px;
+  }
+
+  .intro {
+    font-size: 1.15rem;
+  }
+
+  .letter-card {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
